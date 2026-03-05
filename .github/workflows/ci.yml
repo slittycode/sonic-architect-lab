@@ -1,0 +1,20 @@
+name: Lab CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify lab partition
+        run: |
+          test -d skills
+          test -d archive
+          test -d plans
+          test ! -f App.tsx
+          test ! -f index.tsx
